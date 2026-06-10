@@ -13,33 +13,45 @@
 </head>
 <body>
   <h1>Data Deletion Instructions</h1>
-  <p><strong>Last updated: May 14, 2026</strong></p>
+  <p><strong>Last updated: June 10, 2026</strong></p>
 
-  <p>If you would like to delete your data from PostAuto, follow the steps below. All stored credentials, page tokens, and associated posting records will be permanently removed.</p>
+  <p>If you would like to delete your data from PostAuto, follow the steps below. All stored credentials, platform tokens, and associated posting records will be permanently removed.</p>
 
-  <h2>How to Request Data Deletion</h2>
+  <h2>How to Request Full Account Deletion</h2>
   <div class="steps">
     <ol>
       <li>Send an email to <a href="mailto:jahidul.activity@gmail.com">jahidul.activity@gmail.com</a> with the subject line: <strong>"PostAuto Data Deletion Request"</strong></li>
-      <li>Include the Facebook Page name or Page ID associated with your account.</li>
+      <li>Include the email address associated with your PostAuto account.</li>
       <li>We will confirm deletion within <strong>7 business days</strong>.</li>
     </ol>
   </div>
 
   <h2>What Gets Deleted</h2>
   <ul>
-    <li>Your encrypted Facebook Page Access Token</li>
-    <li>Your Facebook Page ID and associated account record</li>
-    <li>All content job records associated with your account</li>
+    <li>Your encrypted Facebook Page access token and Page ID</li>
+    <li>Your Instagram Business Account ID (if connected)</li>
+    <li>Your encrypted LinkedIn access token and Person ID</li>
+    <li>Your PostAuto account record and profile data</li>
+    <li>All generated content job records associated with your account</li>
+    <li>All generated images stored in our S3 bucket for your account</li>
   </ul>
 
-  <h2>Revoking App Access Directly</h2>
-  <p>You can also immediately revoke PostAuto's access to your Facebook Page at any time:</p>
+  <h2>Revoking Platform Access Directly</h2>
+  <p>You can also immediately revoke PostAuto's access on each platform without contacting us. This invalidates the access token in our system right away.</p>
+
+  <h3>Facebook &amp; Instagram</h3>
   <ol>
-    <li>Go to <strong>Facebook Settings → Business Integrations</strong></li>
+    <li>Go to <strong>Facebook Settings → Security and Login → Business Integrations</strong></li>
     <li>Find <strong>PostAuto</strong> and click <strong>Remove</strong></li>
   </ol>
-  <p>This revokes the access token immediately. Your data will be deleted from our systems within 7 days.</p>
+
+  <h3>LinkedIn</h3>
+  <ol>
+    <li>Go to <strong>LinkedIn Settings → Data Privacy → Other Applications</strong></li>
+    <li>Find <strong>PostAuto</strong> and click <strong>Remove</strong></li>
+  </ol>
+
+  <p>After revoking access directly on a platform, your credential data will be removed from our systems within 7 days. To delete all remaining PostAuto data, please still send us the email request above.</p>
 
   <h2>Contact</h2>
   <p><a href="mailto:jahidul.activity@gmail.com">jahidul.activity@gmail.com</a></p>

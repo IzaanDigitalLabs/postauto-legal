@@ -7,29 +7,100 @@
   <style>
     body { font-family: sans-serif; max-width: 720px; margin: 40px auto; padding: 0 20px; color: #222; line-height: 1.7; }
     h1 { font-size: 1.8rem; } h2 { font-size: 1.2rem; margin-top: 2rem; }
+    h3 { font-size: 1rem; margin-top: 1.4rem; margin-bottom: 0.3rem; }
     a { color: #0066cc; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+    th, td { text-align: left; padding: 8px 12px; border: 1px solid #ddd; }
+    th { background: #f5f5f5; }
+    .note { background: #f9f9f9; border-left: 3px solid #ccc; padding: 10px 16px; font-size: 0.9rem; border-radius: 0 4px 4px 0; }
   </style>
 </head>
 <body>
   <h1>Privacy Policy</h1>
-  <p><strong>Last updated: May 14, 2026</strong></p>
+  <p><strong>Last updated: June 10, 2026</strong></p>
 
-  <p>PostAuto ("we", "our", "the app") is a social media automation tool that publishes content to Facebook Pages on behalf of authorized page administrators. This policy explains what data we access and how we use it.</p>
+  <p>PostAuto ("we", "our", "the app") is a social media automation tool that publishes AI-generated content to your connected social media accounts on your behalf. This policy explains what data we access, how we store it, and your rights regarding that data.</p>
 
-  <h2>Data We Access</h2>
+  <p>We connect to the following platforms: <strong>Facebook, Instagram, and LinkedIn</strong>. This policy covers all three.</p>
+
+  <h2>1. Data We Access per Platform</h2>
+
+  <h3>Facebook</h3>
+  <table>
+    <tr><th>Data</th><th>Purpose</th></tr>
+    <tr><td>Facebook Page Access Token</td><td>Publish posts to your Facebook Page on your behalf</td></tr>
+    <tr><td>Facebook Page ID &amp; name</td><td>Identify which page to post to; display in the PostAuto UI</td></tr>
+    <tr><td>Instagram Business Account ID (if linked to your Page)</td><td>Publish posts to your Instagram Business account</td></tr>
+  </table>
+  <p class="note">We do not access your personal Facebook profile, friends list, messages, or any data beyond what is listed above.</p>
+
+  <h3>Instagram</h3>
+  <table>
+    <tr><th>Data</th><th>Purpose</th></tr>
+    <tr><td>Instagram Business Account ID</td><td>Identify the Instagram account to post to</td></tr>
+    <tr><td>Instagram page name &amp; handle</td><td>Display in the PostAuto UI; include in generated post images</td></tr>
+  </table>
+  <p class="note">Instagram access is granted via the same Facebook OAuth flow. We use the Instagram Content Publishing API only. No follower data, DMs, or analytics are accessed.</p>
+
+  <h3>LinkedIn</h3>
+  <table>
+    <tr><th>Data</th><th>Purpose</th></tr>
+    <tr><td>LinkedIn OAuth Access Token</td><td>Publish posts to your personal LinkedIn profile on your behalf</td></tr>
+    <tr><td>LinkedIn Person ID (sub)</td><td>Construct the author URN required by the LinkedIn API</td></tr>
+    <tr><td>LinkedIn display name</td><td>Display in the PostAuto UI to confirm which account is connected</td></tr>
+  </table>
+  <p class="note">We use the <code>openid profile w_member_social</code> OAuth scopes. We do not access your LinkedIn connections, messages, job history, or any other profile data beyond your name and account identifier.</p>
+
+  <h2>2. How We Store Your Data</h2>
   <ul>
-    <li><strong>Facebook Page Access Tokens</strong> – used solely to publish posts to your Facebook Page on your behalf.</li>
-    <li><strong>Facebook Page ID</strong> – used to identify which page to post to.</li>
-    <li><strong>No personal Facebook profile data</strong> is accessed or stored.</li>
+    <li><strong>Access tokens</strong> for all platforms are encrypted at rest using AWS Key Management Service (KMS) with per-account encryption contexts. Tokens are never stored in plaintext.</li>
+    <li><strong>Account identifiers and display names</strong> (Page IDs, Person IDs, handles) are stored in Amazon DynamoDB associated with your PostAuto account.</li>
+    <li><strong>Generated post content</strong> (text, images) is stored in Amazon S3 and DynamoDB for approval workflow and historical reference.</li>
+    <li>All data is stored in the <strong>US East (N. Virginia) AWS region</strong>.</li>
   </ul>
 
-  <h2>How We Use Your Data</h2>
-  <p>Access tokens and page identifiers are stored encrypted (AWS KMS) and used exclusively for automated posting to your authorized Facebook Page. We do not sell, share, or transfer your data to any third party.</p>
+  <h2>3. How We Use Your Data</h2>
+  <ul>
+    <li>Platform credentials are used <strong>exclusively</strong> to publish content that you have approved (or set to auto-publish) to your connected accounts.</li>
+    <li>Display names and identifiers are used within the PostAuto UI to show you which accounts are connected.</li>
+    <li>We do <strong>not</strong> sell, rent, or share your data with any third party for marketing or advertising purposes.</li>
+    <li>We do not use your data to train machine learning models.</li>
+  </ul>
 
-  <h2>Data Retention</h2>
-  <p>Credentials are retained as long as you use the service. You may request deletion at any time (see Data Deletion below). Published post records are retained for analytics purposes and deleted on request.</p>
+  <h2>4. Third-Party Services</h2>
+  <p>PostAuto integrates with the following third-party services to deliver its functionality:</p>
+  <ul>
+    <li><strong>Meta (Facebook / Instagram)</strong> – Graph API for publishing. Subject to <a href="https://www.facebook.com/privacy/policy" target="_blank">Meta's Privacy Policy</a>.</li>
+    <li><strong>LinkedIn</strong> – UGC Posts API for publishing. Subject to <a href="https://www.linkedin.com/legal/privacy-policy" target="_blank">LinkedIn's Privacy Policy</a>.</li>
+    <li><strong>Amazon Web Services (AWS)</strong> – Cloud infrastructure (Lambda, DynamoDB, S3, KMS, SES, Bedrock). Subject to <a href="https://aws.amazon.com/privacy/" target="_blank">AWS's Privacy Notice</a>.</li>
+    <li><strong>Amazon Bedrock / Anthropic Claude</strong> – AI model used to generate post content. Prompts and outputs are not used to train third-party models under our enterprise agreement.</li>
+  </ul>
 
-  <h2>Contact</h2>
-  <p>For privacy questions or data deletion requests, contact: <a href="mailto:jahidul.activity@gmail.com">jahidul.activity@gmail.com</a></p>
+  <h2>5. Data Retention</h2>
+  <ul>
+    <li>Platform credentials are retained for as long as your PostAuto account is active.</li>
+    <li>Generated post records are retained for historical reference and deleted on request.</li>
+    <li>You may request full deletion of your data at any time (see <a href="../data-deletion/">Data Deletion Instructions</a>).</li>
+  </ul>
+
+  <h2>6. Your Rights</h2>
+  <p>You have the right to:</p>
+  <ul>
+    <li><strong>Access</strong> the data we hold about you.</li>
+    <li><strong>Delete</strong> your account and all associated data.</li>
+    <li><strong>Revoke</strong> platform access at any time directly via each platform's settings (Facebook Business Integrations, LinkedIn App Settings) — this immediately invalidates the access token on our end.</li>
+    <li><strong>Disconnect</strong> individual platforms within PostAuto without deleting your account.</li>
+  </ul>
+
+  <h2>7. Children's Privacy</h2>
+  <p>PostAuto is not directed at children under 13. We do not knowingly collect data from children.</p>
+
+  <h2>8. Changes to This Policy</h2>
+  <p>We may update this policy as we add new platform integrations or change our data practices. The "Last updated" date at the top will reflect any changes. Continued use of PostAuto after changes constitutes acceptance of the updated policy.</p>
+
+  <h2>9. Contact</h2>
+  <p>For privacy questions, data access requests, or data deletion requests, contact:</p>
+  <p><a href="mailto:jahidul.activity@gmail.com">jahidul.activity@gmail.com</a></p>
+  <p>We aim to respond within 7 business days.</p>
 </body>
 </html>
